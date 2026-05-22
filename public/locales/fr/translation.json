@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "skills": "Moi & Expertises",
+    "demos": "Démos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Création de Solutions Web Professionnelles pour Votre Succès",
+    "desc": "Développeur web passionné, je transforme vos idées en solutions digitales performantes et sur mesure.",
+    "btn": "Voir Mes Démos"
+  },
+  "skills": {
+    "title": "Moi & Mes Expertises",
+    "subtitle": "Des solutions complètes pour répondre à tous vos besoins digitaux",
+    "design": "Design Web",
+    "designDesc": "Interfaces modernes et intuitives qui captivent vos visiteurs.",
+    "responsive": "Développement Responsive",
+    "responsiveDesc": "Sites web parfaitement adaptés à tous les écrans, du mobile au desktop.",
+    "seo": "Optimisation SEO",
+    "seoDesc": "Amélioration de votre visibilité sur les moteurs de recherche."
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "subtitle": "Discutons de votre projet et donnons vie à vos idées",
+    "name": "Nom",
+    "namePlaceholder": "Votre nom complet",
+    "email": "Email",
+    "emailPlaceholder": "votre.email@exemple.com",
+    "subject": "Sujet",
+    "subjectPlaceholder": "Objet de votre message",
+    "message": "Message",
+    "messagePlaceholder": "Décrivez votre projet ou votre demande...",
+    "send": "Envoyer le message",
+    "info": "Informations de contact",
+    "follow": "Suivez-moi"
+  },
+  "footer": {
+    "desc": "Création de sites web professionnels et solutions digitales sur mesure.",
+    "nav": "Navigation",
+    "legal": "Légal",
+    "mentions": "Mentions légales",
+    "privacy": "Politique de confidentialité"
+  },
+
+  "legalNotice": {
+    "title": "Mentions Légales",
+    "editor": "Éditeur du site : Edson Eugene (Agence Edson)",
+    "email": "Contact : agenceedson@gmail.com",
+    "host": "Hébergement : [Nom de ton hébergeur, ex: Vercel, Netlify]",
+    "copyright": "Propriété intellectuelle : Le design, le code et le contenu de ce site sont la propriété exclusive d'Edson Eugene."
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "dataCollected": "Données collectées : Nom, adresse courriel et contenu du message via le formulaire de contact.",
+    "purpose": "Utilisation : Ces informations servent uniquement à vous répondre. Elles ne sont ni vendues, ni partagées à des tiers.",
+    "rights": "Vos droits : Vous pouvez demander la suppression de vos données en m'écrivant directement par courriel."
+  }
+}

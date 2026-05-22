@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "Home",
+    "skills": "Me & Expertise",
+    "demos": "Demos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Creating Professional Web Solutions for Your Success",
+    "desc": "Passionate web developer, I transform your ideas into high-performance, custom digital solutions.",
+    "btn": "View My Demos"
+  },
+  "skills": {
+    "title": "Me & My Expertise",
+    "subtitle": "Comprehensive solutions to meet all your digital needs",
+    "design": "Web Design",
+    "designDesc": "Modern and intuitive interfaces that captivate your visitors.",
+    "responsive": "Responsive Development",
+    "responsiveDesc": "Websites perfectly adapted to all screens, from mobile to desktop.",
+    "seo": "SEO Optimization",
+    "seoDesc": "Improving your visibility on search engines."
+  },
+  "contact": {
+    "title": "Contact Me",
+    "subtitle": "Let's discuss your project and bring your ideas to life",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "Subject of your message",
+    "message": "Message",
+    "messagePlaceholder": "Describe your project or request...",
+    "send": "Send Message",
+    "info": "Contact Information",
+    "follow": "Follow Me"
+  },
+  "footer": {
+    "desc": "Creation of professional websites and custom digital solutions.",
+    "nav": "Navigation",
+    "legal": "Legal",
+    "mentions": "Legal Notice",
+    "privacy": "Privacy Policy"
+  },
+  "legalNotice": {
+    "title": "Legal Notice",
+    "editor": "Website Publisher: Edson Eugene (Agence Edson)",
+    "email": "Contact: agenceedson@gmail.com",
+    "host": "Hosting: [Name of your host, e.g., Vercel, Netlify]",
+    "copyright": "Intellectual Property: The design, code, and content of this site are the exclusive property of Edson Eugene."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "dataCollected": "Data collected: Name, email address, and message content via the contact form.",
+    "purpose": "Purpose: This information is used solely to reply to your inquiries. It is never sold or shared with third parties.",
+    "rights": "Your rights: You can request the deletion of your data by contacting me directly via email."
+  }
+}
