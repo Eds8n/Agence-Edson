@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Accueil",
-    "skills": "Moi & Expertises",
+    "skills": "Compétences",
+    "about": "À propos",
     "demos": "Démos",
     "contact": "Contact"
   },
@@ -34,6 +35,32 @@
     "title": "À propos de moi",
     "subtitle": "Qui se cache derrière Agence Edson ?",
     "desc": "Je suis un étudiant passionné en informatique qui conçoit le web comme un outil de performance et d'automatisation.\n\nMon but avec l'Agence Edson est de donner aux commerces locaux une image en ligne moderne, professionnelle et haut de gamme. Mais au-delà du visuel, je crée des sites qui travaillent pour vous. En automatisant vos tâches répétitives — comme la consultation de vos services, de vos menus ou la prise de contact —, votre site vous fait gagner un temps précieux chaque semaine.\n\nMoins de temps perdu sur la logistique, c'est plus de temps à investir dans la croissance de votre entreprise ou à partager avec votre famille. Je mise sur une approche transparente, efficace et sans jargon pour propulser votre présence sur internet."
+  },
+  "demos": {
+    "section_subtitle": "Découvrez comment nous transformons des concepts en outils business concrets.",
+    "zoom_hint": "[Cliquer pour zoomer sur l'image]",
+    "tab_home": "Accueil",
+    "tab_prices": "Prix & Services",
+    "info_type_label": "Type:",
+    "info_goal_label": "But:",
+    
+    "item1_title": "The Sharp Cut - Barber Shop",
+    "item1_tagline": "Design Sombre & Premium pour Homme Moderne",
+    "item1_desc": "Site vitrine complet démontrant un look audacieux et une structure claire pour les services et les tarifs.",
+    "item1_info_type": "Site Vitrine Premium",
+    "item1_info_goal": "Attirer une clientèle haut de gamme et augmenter les rendez-vous.",
+    
+    "item2_title": "L'Épicurien - Restaurant Gastronomique",
+    "item2_tagline": "Expérience Culinaire Chaleureuse & Intuitive",
+    "item2_desc": "Design appétissant avec menu interactif et système de réservation instantanée.",
+    "item2_info_type": "Site Menu & Réservation",
+    "item2_info_goal": "Faciliter les réservations et présenter les plats de manière alléchante.",
+    
+    "item3_title": "Pattes & Co - Hôtel Animalier & Spa",
+    "item3_tagline": "Confiance, Soin & Transparence pour les Animaux",
+    "item3_desc": "Interface rassurante incluant un simulateur de tarif interactif en temps réel.",
+    "item3_info_type": "Site Complexe Animalier & Spa",
+    "item3_info_goal": "Rassurer les propriétaires d'animaux et simplifier les réservations."
   },
   "contact": {
     "title": "Contactez-moi",

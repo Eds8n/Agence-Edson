@@ -1,17 +1,94 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import logoImg from './assets/logo-ee.png';
 import './App.css';
 
+// ----------------------------------------------------------------------
+// Composant pour le carrousel de chaque projet (Album Photo)
+// ----------------------------------------------------------------------
+function ProjectCard({ proj, onZoom, t }) {
+  const [imgIndex, setImgIndex] = useState(0);
+
+  return (
+    <div className="demo-item-detailed">
+      {/* Conteneur d'image cliquable (ouvre le zoom) */}
+      <div 
+        className="carousel-container" 
+        onClick={() => onZoom(proj.images[imgIndex])}
+        title={t('demos.zoom_hint')} // Ajout d'une info-bulle au survol
+      >
+        <img 
+          src={proj.images[imgIndex]} 
+          alt={t(`demos.${proj.key}_title`)} // Traduction du titre
+          className="carousel-image" 
+        />
+        
+        {/* Étiquette d'information */}
+        <span className="demo-image-label">
+          {imgIndex === 0 ? t('demos.tab_home') : t('demos.tab_prices')}
+        </span>
+        
+        {/* Cercles de navigation */}
+        <div 
+          className="carousel-dots" 
+          onClick={(e) => e.stopPropagation()} // Empêche le clic sur les points de déclencher le zoom
+        >
+          {proj.images.map((_, idx) => (
+            <button
+              key={idx}
+              className={`dot ${idx === imgIndex ? 'active' : ''}`}
+              onClick={() => setImgIndex(idx)}
+              aria-label={`Voir l'image ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="demo-text-content">
+        <span className="demo-tagline">{t(`demos.${proj.key}_tagline`)}</span>
+        <h3>{t(`demos.${proj.key}_title`)}</h3>
+        <p>{t(`demos.${proj.key}_desc`)}</p>
+        <p className="zoom-hint-text">{t('demos.zoom_hint')}</p> {/* Ajout d'un rappel textuel pour le zoom */}
+
+        {/* NOUVELLE SECTION D'INFORMATION CLÉ (BORDURE À GAUCHE) */}
+        <div className="demo-info-section">
+          <div className="info-row">
+            <span className="info-label">{t('demos.info_type_label')}</span>
+            <span className="info-value">{t(`demos.${proj.key}_info_type`)}</span>
+          </div>
+          <div className="info-row">
+            <span className="info-label">{t('demos.info_goal_label')}</span>
+            <span className="info-value">{t(`demos.${proj.key}_info_goal`)}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+// ----------------------------------------------------------------------
+// Application Principale
+// ----------------------------------------------------------------------
 function App() {
   const { t, i18n } = useTranslation();
   
-  // État pour la fenêtre modale
+  // États pour les modales
   const [modalType, setModalType] = useState(null); // 'legal' ou 'privacy' ou null
+  const [zoomedImage, setZoomedImage] = useState(null); // Gère l'image affichée en plein écran
+
+  // Empêche le scroll sans faire remonter la page (Fix pour mobile)
+  useEffect(() => {
+    if (modalType || zoomedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [modalType, zoomedImage]);
 
   const [formData, setFormData] = useState({
-    nom: '', email: '', sujet: '', message: ''
+    nom: '', email: '', message: '' // Simplification du formulaire
   });
 
   const handleInputChange = (e) => {
@@ -22,6 +99,7 @@ function App() {
    const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Utilisation des clés du fichier .env pour EmailJS
     const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -29,11 +107,11 @@ function App() {
     emailjs.sendForm(serviceID, templateID, e.target, publicKey)
       .then((result) => {
           console.log('Succès:', result.text);
-          alert('Message envoyé avec succès !');
-          setFormData({ nom: '', email: '', sujet: '', message: '' }); 
+          alert(t('contact.alert_success'));
+          setFormData({ nom: '', email: '', message: '' }); 
       }, (error) => {
           console.log('Erreur:', error.text);
-          alert('Une erreur est survenue. Veuillez réessayer.');
+          alert(t('contact.alert_error'));
       });
   };
 
@@ -48,14 +126,35 @@ function App() {
     { title: t('skills.seo'), desc: t('skills.seoDesc') }
   ];
 
+  // Le tableau n'utilise plus que des clés de traduction
   const realisations = [
-    { image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80', title: 'Plateforme E-commerce', desc: 'Boutique en ligne complète avec système de paiement sécurisé.', tags: ['React', 'Node.js', 'Stripe', 'MongoDB'] },
-    { image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80', title: 'Application SaaS', desc: 'Solution cloud pour la gestion de projets avec collaboration en temps réel.', tags: ['Vue.js', 'Firebase', 'TailwindCSS', 'WebSocket'] }
+    { 
+      key: 'item1', // Clé pour l'i18n (demos.item1_title, demos.item1_desc, etc.)
+      images: [
+        '/images/coiffeur/Accueil-barber.png',
+        '/images/coiffeur/prix-barber.png'   
+      ]
+    },
+    { 
+      key: 'item2',
+      images: [
+        '/images/resto/accueil-resto.png',
+        '/images/resto/prix-resto.png'         
+      ]
+    },
+    { 
+      key: 'item3',
+      images: [
+        '/images/Pattes & Co/accueil-chien.png',
+        '/images/Pattes & Co/prix-chien.png'     
+      ]
+    }
   ];
 
   const heroBg = 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80';
+  
   return (
-    <div className={`app-container ${modalType ? 'modal-active' : ''}`}>
+    <div className="app-container">
       <header className="navbar">
         <div className="container">
           <div className="logo">
@@ -65,7 +164,7 @@ function App() {
           <nav className="nav-links">
             <a href="#accueil">{t('nav.home')}</a>
             <a href="#competences">{t('nav.skills')}</a>
-            <a href="#about">{t('about.title')}</a> {/* AJOUT NAVBAR */}
+            <a href="#about">{t('nav.about')}</a> 
             <a href="#portfolio">{t('nav.demos')}</a>
             <a href="#contact">{t('nav.contact')}</a>
             <button onClick={changeLanguage} className={`lang-btn ${i18n.language.startsWith('fr') ? 'fr-flag' : 'en-flag'}`}>
@@ -120,7 +219,6 @@ function App() {
         </div>
       </section>
 
-      {/* NOUVELLE SECTION À PROPOS ICI */}
       <section id="about" className="about-section">
         <div className="container">
           <h2 className="section-title">{t('about.title')}</h2>
@@ -133,17 +231,17 @@ function App() {
 
       <section id="portfolio" className="portfolio-section">
         <div className="container">
-          <h2 className="section-title">{t('nav.demos')}</h2>
-          <div className="portfolio-grid">
+          <h2 className="section-title">{t('nav.demos')}</h2> {/* Traduction du titre principal */}
+          <p className="section-subtitle">Découvrez comment nous transformons des concepts en outils business concrets.</p>
+          
+          <div className="demos-detailed-list">
             {realisations.map((proj, index) => (
-              <div key={index} className="project-card">
-                <img src={proj.image} alt={proj.title} className="project-image" />
-                <div className="project-details">
-                  <h3>{proj.title}</h3>
-                  <p>{proj.desc}</p>
-                  <div className="tech-tags">{proj.tags.map((tag, i) => <span key={i} className="tech-tag">{tag}</span>)}</div>
-                </div>
-              </div>
+              <ProjectCard 
+                key={index} 
+                proj={proj} 
+                onZoom={setZoomedImage}
+                t={t} // On passe la fonction 't' au composant enfant
+              />
             ))}
           </div>
         </div>
@@ -190,7 +288,7 @@ function App() {
               <h4>{t('footer.nav')}</h4>
               <a href="#accueil">{t('nav.home')}</a>
               <a href="#competences">{t('nav.skills')}</a>
-              <a href="#about">{t('about.title')}</a> {/* AJOUT FOOTER */}
+              <a href="#about">{t('nav.about')}</a> 
             </div>
             <div>
               <h4>{t('footer.legal')}</h4>
@@ -199,9 +297,7 @@ function App() {
             </div>
           </div>
         </div>
-      </footer>
-
-      {/* LA FENÊTRE MODALE */}
+      </footer> 
       {modalType && (
         <div className="modal-overlay" onClick={() => setModalType(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -226,6 +322,17 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* LA FENÊTRE MODALE POUR LE ZOOM D'IMAGE */}
+      {zoomedImage && (
+        <div className="modal-overlay" onClick={() => setZoomedImage(null)}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="image-modal-close" onClick={() => setZoomedImage(null)}>&times;</button>
+            <img src={zoomedImage} alt="Aperçu du projet zoomé" className="zoomed-image-full" />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

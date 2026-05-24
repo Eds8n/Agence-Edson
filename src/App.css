@@ -176,12 +176,16 @@ section {
 
 .competence-card {
   background-color: #FFFFFF;
-  padding: 40px;
+  padding: 50px 40px; /* Plus d'espace en haut et en bas */
   border-radius: 12px;
   border: 1px solid rgba(161, 125, 107, 0.1);
   box-shadow: 0 4px 20px var(--shadow);
   transition: transform 0.3s, box-shadow 0.3s;
   text-align: left;
+  min-height: 280px; /* Force une hauteur minimale pour aligner les boîtes */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre le texte verticalement */
 }
 
 .competence-card:hover {
@@ -195,13 +199,14 @@ section {
 }
 
 .competence-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 15px;
 }
 
 .competence-card p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   opacity: 0.9;
+  line-height: 1.7;
   margin: 0;
 }
 
@@ -220,33 +225,27 @@ section {
 
 .approche-card {
   background: white;
-  padding: 30px;
+  padding: 50px 40px; /* Plus d'espace interne */
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   border-top: 4px solid var(--accent-color);
   text-align: center;
+  min-height: 250px; /* Force une hauteur minimale */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre le texte verticalement */
 }
 
 .approche-card h3 {
   color: var(--text-dark);
-  margin-bottom: 15px;
-  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
 }
 
 .approche-card p {
   color: var(--text-light);
-  line-height: 1.6;
-}
-
-/* Portfolio Section */
-.portfolio-section {
-  background-color: #FFFFFF; /* Blanc */
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 40px;
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
 /* Section À propos */
@@ -268,53 +267,223 @@ section {
   white-space: pre-line; /* Permet de garder les retours à la ligne du JSON */
 }
 
-.project-card {
-  background-color: var(--card-bg);
+/* ==========================================================================
+   CARROUSEL PORTFOLIO (3 COLONNES) ET ZOOM
+   ========================================================================== */
+
+/* Élargit la section uniquement ici */
+.portfolio-section .container {
+  max-width: 1450px;
+}
+
+.portfolio-section {
+  padding: 120px 0;
+  background-color: #f7f3ed; /* NOUVEAU : Gris-beige très clair pour l'alternance */
+  border-top: 1px solid rgba(161, 125, 107, 0.05);
+  border-bottom: 1px solid rgba(161, 125, 107, 0.05);
+}
+
+/* Grille de 3 colonnes */
+.demos-detailed-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 60px;
+}
+
+/* Bloc d'un projet */
+.demo-item-detailed {
+  background-color: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px var(--shadow);
-  transition: transform 0.3s;
+  box-shadow: 0 10px 30px var(--shadow);
+  border: 1px solid rgba(161, 125, 107, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-image {
+.carousel-container {
+  position: relative;
+  height: 400px; /* Grande hauteur pour des images nettes */
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  background-color: #fcfaf8;
+  border-bottom: 1px solid rgba(161, 125, 107, 0.1);
+  overflow: hidden; 
+  cursor: pointer;
 }
 
-.project-details {
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Remplit l'espace sans déformer */
+  object-position: top; /* Focus sur le haut de ton site */
+  transition: transform 0.4s ease;
+}
+
+.carousel-container:hover .carousel-image {
+  transform: scale(1.03); /* Zoom léger et contrôlé */
+}
+
+/* Étiquette (Accueil / Prix) */
+.demo-image-label {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: var(--text-dark);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+/* Navigation avec les points */
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(91, 61, 43, 0.4);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.dot.active {
+  background-color: var(--accent-color);
+  transform: scale(1.3);
+}
+
+.dot:hover {
+  background-color: var(--text-color);
+}
+
+/* Texte sous les images */
+.demo-text-content {
   padding: 30px;
+  text-align: left;
+  flex-grow: 1; /* Permet à cette zone de prendre tout l'espace disponible */
+  display: flex;
+  flex-direction: column; /* Organise le contenu en colonne */
 }
 
-.project-details h3 {
-  font-size: 1.5rem;
+.demo-tagline {
+  display: block;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 0.75rem;
   margin-bottom: 10px;
 }
 
-.project-details p {
-  opacity: 0.9;
-  margin-bottom: 20px;
+.demo-text-content h3 {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+  margin: 0 0 10px 0;
 }
 
-.tech-tags {
+.demo-text-content p {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.zoom-hint-text {
+  font-size: 0.85rem !important;
+  color: var(--accent-color) !important;
+  font-style: italic;
+  margin-bottom: 25px !important;
+  flex-grow: 1; 
+}
+/* NOUVELLE SECTION D'INFORMATION CLÉ (Remplace les tags) */
+.demo-info-section {
+  background-color: rgba(161, 125, 107, 0.05);
+  border-left: 4px solid var(--accent-color);
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: auto; 
+}
+
+.info-row {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-right: 8px;
+}
+
+.info-value {
+  color: var(--text-color);
+}
+
+/* ==========================================================================
+   MODALE ZOOM IMAGE
+   ========================================================================== */
+
+.image-modal-content {
+  position: relative;
+  max-width: 95vw;
+  max-height: 95vh;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  animation: modalFade 0.3s ease-out;
 }
 
-.tech-tag {
-  display: inline-block;
-  padding: 5px 12px;
-  background-color: rgba(161, 125, 107, 0.08);
-  border: 1px solid rgba(161, 125, 107, 0.2);
-  border-radius: 50px;
-  color: var(--accent-color);
-  font-size: 0.8rem;
-  font-weight: 500;
+.zoomed-image-full {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain; /* Garde les proportions sans couper */
+  border-radius: 8px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: var(--accent-color);
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 2010;
+  transition: background-color 0.3s;
+}
+
+.image-modal-close:hover {
+  background-color: var(--text-color);
 }
 
 /* Contact Section */
@@ -389,23 +558,6 @@ section {
 .contact-info p {
   opacity: 0.9;
   margin-bottom: 15px;
-}
-
-.social-links {
-  display: flex;
-  gap: 15px;
-}
-
-.social-links a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(161, 125, 107, 0.1);
-  color: var(--accent-color);
-  font-weight: 700;
 }
 
 /* Footer */
@@ -483,7 +635,7 @@ section {
   background-color: #7B1113;
 }
 
-/* Styles pour la fenêtre modale */
+/* Styles pour les fenêtres modales */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -562,7 +714,16 @@ section {
   height: 100vh;
 }
 
-/* Responsive */
+/* ==========================================================================
+   RESPONSIVE (TABLETTE ET TÉLÉPHONE)
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .demos-detailed-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .navbar .container {
     flex-direction: column;
@@ -583,7 +744,7 @@ section {
     font-size: 2.5rem;
   }
   
-  .portfolio-grid {
+  .demos-detailed-list {
     grid-template-columns: 1fr;
   }
   

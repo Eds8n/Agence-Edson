@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Home",
-    "skills": "Me & Expertise",
+    "skills": "Skills",
+    "about": "About Me",
     "demos": "Demos",
     "contact": "Contact"
   },
@@ -35,6 +36,33 @@
     "subtitle": "Who is behind Agence Edson?",
     "desc": "I am a passionate computer science student who views the web as a tool for performance and automation.\n\nMy goal with Agence Edson is to provide local businesses with a modern, sharp, and premium online image. But beyond the visuals, I build websites that actually work for you. By automating repetitive tasks — like showcasing your services, menus, or handling inquiries —, your site saves you precious hours every week.\n\nLess time wasted on logistics means more time to invest in growing your business or spending with your family. I focus on a transparent, efficient, and jargon-free approach to elevate your internet presence."
   },
+    "demos": {
+    "section_subtitle": "Discover how we transform concepts into concrete business tools.",
+    "zoom_hint": "[Click to zoom on image]",
+    "tab_home": "Home",
+    "tab_prices": "Prices & Services",
+    "info_type_label": "Type:",
+    "info_goal_label": "Goal:",
+    
+    "item1_title": "The Sharp Cut - Barber Shop",
+    "item1_tagline": "Dark & Premium Design for the Modern Man",
+    "item1_desc": "Complete showcase site demonstrating a bold look and clear structure for services and pricing.",
+    "item1_info_type": "Premium Showcase Site",
+    "item1_info_goal": "Attract high-end clientele and increase appointments.",
+    
+    "item2_title": "L'Épicurien - Gourmet Restaurant",
+    "item2_tagline": "Warm & Intuitive Culinary Experience",
+    "item2_desc": "Appetizing design with interactive menu and instant reservation system.",
+    "item2_info_type": "Menu & Booking Site",
+    "item2_info_goal": "Facilitate bookings and present dishes in an appealing way.",
+    
+    "item3_title": "Pattes & Co - Dog Hotel & Spa",
+    "item3_tagline": "Trust, Care & Transparency for Animals",
+    "item3_desc": "Reassuring interface including a real-time interactive price simulator.",
+    "item3_info_type": "Animal Hotel & Spa Site",
+    "item3_info_goal": "Reassure pet owners and simplify reservations."
+  },
+
   "contact": {
     "title": "Contact Me",
     "subtitle": "Let's discuss your project and bring your ideas to life",
