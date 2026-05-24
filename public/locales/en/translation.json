@@ -75,6 +75,8 @@
     "subjectPlaceholder": "Subject of your message",
     "message": "Message",
     "messagePlaceholder": "Describe your project or request...",
+    "alert_success": "Message sent successfully!",
+    "alert_error": "An error occurred. Please try again.",
     "send": "Send Message",
     "info": "Contact Information",
     "follow": "Follow Me"

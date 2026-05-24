@@ -74,6 +74,8 @@
     "subjectPlaceholder": "Objet de votre message",
     "message": "Message",
     "messagePlaceholder": "Décrivez votre projet ou votre demande...",
+    "alert_success": "Message envoyé avec succès !",
+    "alert_error": "Une erreur s'est produite. Veuillez réessayer.",
     "send": "Envoyer le message",
     "info": "Informations de contact",
     "follow": "Suivez-moi"
