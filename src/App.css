@@ -2,6 +2,8 @@
 :root {
   --bg-color: #FDF6E3;       /* Fond blanc beige très clair */
   --text-color: #5B3D2B;     /* Texte principal brun foncé */
+  --text-dark: #3A261A;      /* Texte très sombre pour les titres */
+  --text-light: #7A5B49;     /* Texte plus clair pour les paragraphes */
   --accent-color: #A17D6B;   /* Accents et bordures brun moyen */
   --btn-color: #A17D6B;      /* Couleur des boutons */
   --card-bg: #FFFFFF;        /* Fond des cartes (pur blanc) */
@@ -59,10 +61,20 @@ a {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-color);
+}
+
+.navbar-logo {
+  height: 60px;
+  width: auto;
+  border-radius: 50%; /* Garde le logo bien rond */
+  object-fit: cover;
 }
 
 .nav-links {
@@ -193,11 +205,67 @@ section {
   margin: 0;
 }
 
+/* Section Approche */
+.approche-section {
+  padding: 80px 0;
+  background-color: var(--bg-color); /* Beige clair */
+}
+
+.approche-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.approche-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-top: 4px solid var(--accent-color);
+  text-align: center;
+}
+
+.approche-card h3 {
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.approche-card p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
 /* Portfolio Section */
+.portfolio-section {
+  background-color: #FFFFFF; /* Blanc */
+}
+
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 40px;
+}
+
+/* Section À propos */
+.about-section {
+  padding: 80px 0;
+  background-color: #FFFFFF; /* Blanc pour l'alternance */
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-text {
+  font-size: 1.15rem;
+  color: var(--text-color);
+  line-height: 1.8;
+  white-space: pre-line; /* Permet de garder les retours à la ligne du JSON */
 }
 
 .project-card {
@@ -251,7 +319,7 @@ section {
 
 /* Contact Section */
 .contact-section {
-  background-color: var(--card-bg);
+  background-color: var(--bg-color); /* Beige clair */
 }
 
 .contact-content {
@@ -280,7 +348,7 @@ section {
   padding: 12px 15px;
   border: 1px solid rgba(161, 125, 107, 0.2);
   border-radius: 8px;
-  background-color: var(--bg-color);
+  background-color: #FFFFFF; /* Fond blanc pour les champs */
   color: var(--text-color);
   font-family: var(--font-body);
 }
@@ -496,6 +564,21 @@ section {
 
 /* Responsive */
 @media (max-width: 900px) {
+  .navbar .container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .logo {
+    white-space: nowrap;
+  }
+
   .hero-content h1 {
     font-size: 2.5rem;
   }

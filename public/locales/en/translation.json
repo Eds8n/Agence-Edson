@@ -12,13 +12,28 @@
   },
   "skills": {
     "title": "Me & My Expertise",
-    "subtitle": "Comprehensive solutions to meet all your digital needs",
-    "design": "Web Design",
-    "designDesc": "Modern and intuitive interfaces that captivate your visitors.",
-    "responsive": "Responsive Development",
-    "responsiveDesc": "Websites perfectly adapted to all screens, from mobile to desktop.",
-    "seo": "SEO Optimization",
-    "seoDesc": "Improving your visibility on search engines."
+    "subtitle": "Simple and concrete solutions to grow your business",
+    "design": "Unique Design",
+    "designDesc": "I create modern visuals that capture attention. Your site reflects your business identity from the very first second.",
+    "responsive": "Perfect on Mobile",
+    "responsiveDesc": "The majority of your clients use their phones. Your site will be ultra-fast and easy to read on all screens.",
+    "seo": "Found on Google",
+    "seoDesc": "A beautiful site needs to be seen. I optimize your page structure so local clients in your area can easily find you."
+  },
+  "approche": {
+    "title": "My Approach",
+    "subtitle": "The human behind the code",
+    "val1Title": "Transparency & Honesty",
+    "val1Desc": "No false promises or technical jargon. I clearly explain what we are doing and why we are doing it.",
+    "val2Title": "Active Communication",
+    "val2Desc": "I am responsive and listen to your needs. You always know where your project stands, at every stage of design.",
+    "val3Title": "Tailor-Made Solutions",
+    "val3Desc": "I don't do copy-paste. Every business is unique, and your website should reflect your true identity."
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Who is behind Agence Edson?",
+    "desc": "I am a passionate computer science student who views the web as a tool for performance and automation.\n\nMy goal with Agence Edson is to provide local businesses with a modern, sharp, and premium online image. But beyond the visuals, I build websites that actually work for you. By automating repetitive tasks — like showcasing your services, menus, or handling inquiries —, your site saves you precious hours every week.\n\nLess time wasted on logistics means more time to invest in growing your business or spending with your family. I focus on a transparent, efficient, and jargon-free approach to elevate your internet presence."
   },
   "contact": {
     "title": "Contact Me",
@@ -46,7 +61,7 @@
     "title": "Legal Notice",
     "editor": "Website Publisher: Edson Eugene (Agence Edson)",
     "email": "Contact: agenceedson@gmail.com",
-    "host": "Hosting: [Name of your host, e.g., Vercel, Netlify]",
+    "host": "Hosting: Vercel",
     "copyright": "Intellectual Property: The design, code, and content of this site are the exclusive property of Edson Eugene."
   },
   "privacy": {

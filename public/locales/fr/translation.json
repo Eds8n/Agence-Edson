@@ -12,13 +12,28 @@
   },
   "skills": {
     "title": "Moi & Mes Expertises",
-    "subtitle": "Des solutions complètes pour répondre à tous vos besoins digitaux",
-    "design": "Design Web",
-    "designDesc": "Interfaces modernes et intuitives qui captivent vos visiteurs.",
-    "responsive": "Développement Responsive",
-    "responsiveDesc": "Sites web parfaitement adaptés à tous les écrans, du mobile au desktop.",
-    "seo": "Optimisation SEO",
-    "seoDesc": "Amélioration de votre visibilité sur les moteurs de recherche."
+    "subtitle": "Des solutions simples et concrètes pour faire grandir votre entreprise",
+    "design": "Design Unique",
+    "designDesc": "Je crée des visuels modernes qui captent l'attention. Votre site reflète l'identité de votre entreprise dès la première seconde.",
+    "responsive": "Parfait sur Mobile",
+    "responsiveDesc": "La majorité de vos clients utilisent leur téléphone. Votre site sera ultra-rapide et facile à lire sur tous les écrans.",
+    "seo": "Trouvable sur Google",
+    "seoDesc": "Un beau site doit être vu. J'optimise la structure de votre page pour que les clients de votre région vous trouvent facilement."
+  },
+  "approche": {
+    "title": "Mon approche",
+    "subtitle": "L'humain derrière le code",
+    "val1Title": "Transparence & Honnêteté",
+    "val1Desc": "Pas de fausses promesses ni de jargon technique. Je vous explique clairement ce que nous faisons et pourquoi nous le faisons.",
+    "val2Title": "Communication Active",
+    "val2Desc": "Je suis réactif et à l'écoute de vos besoins. Vous savez toujours où en est votre projet, à chaque étape de la conception.",
+    "val3Title": "Solutions Sur-Mesure",
+    "val3Desc": "Je ne fais pas de copier-coller. Chaque entreprise est unique, et votre site web doit refléter votre véritable identité."
+  },
+  "about": {
+    "title": "À propos de moi",
+    "subtitle": "Qui se cache derrière Agence Edson ?",
+    "desc": "Je suis un étudiant passionné en informatique qui conçoit le web comme un outil de performance et d'automatisation.\n\nMon but avec l'Agence Edson est de donner aux commerces locaux une image en ligne moderne, professionnelle et haut de gamme. Mais au-delà du visuel, je crée des sites qui travaillent pour vous. En automatisant vos tâches répétitives — comme la consultation de vos services, de vos menus ou la prise de contact —, votre site vous fait gagner un temps précieux chaque semaine.\n\nMoins de temps perdu sur la logistique, c'est plus de temps à investir dans la croissance de votre entreprise ou à partager avec votre famille. Je mise sur une approche transparente, efficace et sans jargon pour propulser votre présence sur internet."
   },
   "contact": {
     "title": "Contactez-moi",
@@ -42,12 +57,11 @@
     "mentions": "Mentions légales",
     "privacy": "Politique de confidentialité"
   },
-
   "legalNotice": {
     "title": "Mentions Légales",
     "editor": "Éditeur du site : Edson Eugene (Agence Edson)",
     "email": "Contact : agenceedson@gmail.com",
-    "host": "Hébergement : [Nom de ton hébergeur, ex: Vercel, Netlify]",
+    "host": "Hébergement : Vercel",
     "copyright": "Propriété intellectuelle : Le design, le code et le contenu de ce site sont la propriété exclusive d'Edson Eugene."
   },
   "privacy": {

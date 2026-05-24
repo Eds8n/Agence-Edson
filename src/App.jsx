@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
+import logoImg from './assets/logo-ee.png';
 import './App.css';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
+
    const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,16 +53,19 @@ function App() {
     { image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80', title: 'Application SaaS', desc: 'Solution cloud pour la gestion de projets avec collaboration en temps réel.', tags: ['Vue.js', 'Firebase', 'TailwindCSS', 'WebSocket'] }
   ];
 
-  const heroBg = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80';
-
+  const heroBg = 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80';
   return (
     <div className={`app-container ${modalType ? 'modal-active' : ''}`}>
       <header className="navbar">
         <div className="container">
-          <div className="logo">Agence Edson</div>
+          <div className="logo">
+            <img src={logoImg} alt="Logo Agence Edson" className="navbar-logo" />
+            Agence Edson
+          </div>
           <nav className="nav-links">
             <a href="#accueil">{t('nav.home')}</a>
             <a href="#competences">{t('nav.skills')}</a>
+            <a href="#about">{t('about.title')}</a> {/* AJOUT NAVBAR */}
             <a href="#portfolio">{t('nav.demos')}</a>
             <a href="#contact">{t('nav.contact')}</a>
             <button onClick={changeLanguage} className={`lang-btn ${i18n.language.startsWith('fr') ? 'fr-flag' : 'en-flag'}`}>
@@ -71,7 +75,6 @@ function App() {
         </div>
       </header>
 
-      {/* Hero, Compétences et Portfolio restent identiques... */}
       <section id="accueil" className="hero-section" style={{ backgroundImage: `url(${heroBg})` }}>
         <div className="hero-overlay"></div>
         <div className="container hero-content">
@@ -92,6 +95,38 @@ function App() {
                 <p>{comp.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+      
+      <section id="approche" className="approche-section">
+        <div className="container">
+          <h2 className="section-title">{t('approche.title')}</h2>
+          <p className="section-subtitle">{t('approche.subtitle')}</p>
+          <div className="approche-grid">
+            <div className="approche-card">
+              <h3>{t('approche.val1Title')}</h3>
+              <p>{t('approche.val1Desc')}</p>
+            </div>
+            <div className="approche-card">
+              <h3>{t('approche.val2Title')}</h3>
+              <p>{t('approche.val2Desc')}</p>
+            </div>
+            <div className="approche-card">
+              <h3>{t('approche.val3Title')}</h3>
+              <p>{t('approche.val3Desc')}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NOUVELLE SECTION À PROPOS ICI */}
+      <section id="about" className="about-section">
+        <div className="container">
+          <h2 className="section-title">{t('about.title')}</h2>
+          <p className="section-subtitle">{t('about.subtitle')}</p>
+          <div className="about-content">
+            <p className="about-text">{t('about.desc')}</p>
           </div>
         </div>
       </section>
@@ -144,7 +179,10 @@ function App() {
       <footer className="footer">
         <div className="container">
           <div className="footer-left">
-            <div className="logo">Agence Edson</div>
+            <div className="logo">
+              <img src={logoImg} alt="Logo Agence Edson" className="navbar-logo"/>
+              Agence Edson
+            </div>
             <p>{t('footer.desc')}</p>
           </div>
           <div className="footer-right">
@@ -152,10 +190,10 @@ function App() {
               <h4>{t('footer.nav')}</h4>
               <a href="#accueil">{t('nav.home')}</a>
               <a href="#competences">{t('nav.skills')}</a>
+              <a href="#about">{t('about.title')}</a> {/* AJOUT FOOTER */}
             </div>
             <div>
               <h4>{t('footer.legal')}</h4>
-              {/* On utilise des boutons pour ouvrir les modales */}
               <button onClick={() => setModalType('legal')} className="footer-link-btn">{t('footer.mentions')}</button>
               <button onClick={() => setModalType('privacy')} className="footer-link-btn">{t('footer.privacy')}</button>
             </div>
