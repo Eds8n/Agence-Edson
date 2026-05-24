@@ -88,6 +88,23 @@ a {
   color: var(--accent-color);
 }
 
+/* Animations de texte (NOUVEAU) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-text {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0; /* Caché au départ, révélé par l'animation */
+}
+
 /* Hero Section */
 .hero-section {
   background-size: cover;
@@ -116,6 +133,7 @@ a {
   font-size: 3.5rem;
   line-height: 1.2;
   margin-bottom: 20px;
+  animation-delay: 0.1s; /* Delai pour l'animation */
 }
 
 .hero-content p {
@@ -123,6 +141,11 @@ a {
   max-width: 700px;
   margin: 0 auto 40px;
   opacity: 0.9;
+  animation-delay: 0.3s;
+}
+
+.hero-content .btn-primary {
+    animation-delay: 0.5s;
 }
 
 .btn-primary {
@@ -144,6 +167,8 @@ a {
 /* Sections Communes */
 section {
   padding: 80px 0;
+  /* (NOUVEAU) Compense la hauteur du header (env. 90px) lors du scroll automatique */
+  scroll-margin-top: 90px; 
 }
 
 .section-title {
@@ -312,6 +337,45 @@ section {
   cursor: pointer;
 }
 
+/* (NOUVEAU) Flèches de navigation au survol */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    opacity: 0; /* Cachées par défaut */
+    transition: opacity 0.3s ease, background 0.3s;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.carousel-nav-btn.prev {
+    left: 10px;
+}
+
+.carousel-nav-btn.next {
+    right: 10px;
+}
+
+.carousel-container:hover .carousel-nav-btn {
+    opacity: 1; /* Révélées au survol */
+}
+
+.carousel-nav-btn:hover {
+    background: white;
+}
+
+
 .carousel-image {
   width: 100%;
   height: 100%;
@@ -440,7 +504,7 @@ section {
 }
 
 /* ==========================================================================
-   MODALE ZOOM IMAGE
+   MODALE ZOOM IMAGE (NOUVEAU)
    ========================================================================== */
 
 .image-modal-content {
@@ -485,6 +549,7 @@ section {
 .image-modal-close:hover {
   background-color: var(--text-color);
 }
+
 
 /* Contact Section */
 .contact-section {
@@ -712,6 +777,102 @@ section {
 .modal-active {
   overflow: hidden;
   height: 100vh;
+}
+
+/* ==========================================================================
+   CORRECTIONS DU SCROLL ET ANIMATIONS (REVEAL)
+   ========================================================================== */
+
+/* Ajuste le défilement pour ne pas cacher les titres sous la barre de navigation */
+section {
+  padding: 80px 0;
+  scroll-margin-top: 110px; 
+}
+
+/* Animations d'apparition douce (Scroll Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Décalage pour un bel effet en cascade sur les cartes */
+.competences-grid .competence-card:nth-child(1) { transition-delay: 0.1s; }
+.competences-grid .competence-card:nth-child(2) { transition-delay: 0.2s; }
+.competences-grid .competence-card:nth-child(3) { transition-delay: 0.3s; }
+
+.approche-grid .approche-card:nth-child(1) { transition-delay: 0.1s; }
+.approche-grid .approche-card:nth-child(2) { transition-delay: 0.2s; }
+.approche-grid .approche-card:nth-child(3) { transition-delay: 0.3s; }
+
+.demos-detailed-list .demo-item-detailed:nth-child(1) { transition-delay: 0.1s; }
+.demos-detailed-list .demo-item-detailed:nth-child(2) { transition-delay: 0.2s; }
+.demos-detailed-list .demo-item-detailed:nth-child(3) { transition-delay: 0.3s; }
+
+/* ==========================================================================
+   NOUVEAUX BOUTONS DE NAVIGATION MODALE (FLÈCHES)
+   ========================================================================== */
+
+/* ==========================================================================
+   NOUVEAUX BOUTONS DE NAVIGATION MODALE (FLÈCHES) - CORRECTION VISIBILITÉ
+   ========================================================================== */
+
+.modal-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  /* --- ÉTAT PAR DÉFAUT : TRÈS VISIBLE --- */
+  /* NOUVEAU: Arrière-plan semi-transparent pour garantir la visibilité sur fond blanc */
+  background-color: rgba(255, 255, 255, 0.7); 
+  border: 2px solid rgba(161, 125, 107, 0.3); /* Bordure subtile de ta couleur d'accent */
+  /* NOUVEAU: Couleur de flèche sombre (var(--text-dark)) */
+  color: var(--text-dark); 
+  
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2020;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Ajout d'une ombre pour la profondeur */
+}
+
+/* --- ÉTAT AU SURVOL (HOVER) : EFFET INVERSÉ --- */
+.modal-slider-btn:hover {
+  /* NOUVEAU: Fond brun foncé (ton thème) et flèche blanche au survol */
+  background-color: var(--text-dark); 
+  color: #FFFFFF;
+  border-color: var(--text-dark);
+  transform: translateY(-50%) scale(1.1); /* Légère emphase pour un sentiment premium */
+}
+
+.modal-slider-btn.prev {
+  left: 20px;
+}
+
+.modal-slider-btn.next {
+  right: 20px;
+}
+
+/* Ajustement de la modale sur mobile */
+@media (max-width: 900px) {
+  .modal-slider-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  .modal-slider-btn.prev { left: 10px; }
+  .modal-slider-btn.next { right: 10px; }
 }
 
 /* ==========================================================================

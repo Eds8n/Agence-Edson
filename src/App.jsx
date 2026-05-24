@@ -11,28 +11,26 @@ function ProjectCard({ proj, onZoom, t }) {
   const [imgIndex, setImgIndex] = useState(0);
 
   return (
-    <div className="demo-item-detailed">
-      {/* Conteneur d'image cliquable (ouvre le zoom) */}
+    <div className="demo-item-detailed reveal">
+      {/* Conteneur d'image cliquable (passe les infos au zoom) */}
       <div 
         className="carousel-container" 
-        onClick={() => onZoom(proj.images[imgIndex])}
-        title={t('demos.zoom_hint')} // Ajout d'une info-bulle au survol
+        onClick={() => onZoom({ images: proj.images, currentIndex: imgIndex })}
+        title={t('demos.zoom_hint')}
       >
         <img 
           src={proj.images[imgIndex]} 
-          alt={t(`demos.${proj.key}_title`)} // Traduction du titre
+          alt={t(`demos.${proj.key}_title`)}
           className="carousel-image" 
         />
         
-        {/* Étiquette d'information */}
         <span className="demo-image-label">
           {imgIndex === 0 ? t('demos.tab_home') : t('demos.tab_prices')}
         </span>
         
-        {/* Cercles de navigation */}
         <div 
           className="carousel-dots" 
-          onClick={(e) => e.stopPropagation()} // Empêche le clic sur les points de déclencher le zoom
+          onClick={(e) => e.stopPropagation()} 
         >
           {proj.images.map((_, idx) => (
             <button
@@ -49,9 +47,8 @@ function ProjectCard({ proj, onZoom, t }) {
         <span className="demo-tagline">{t(`demos.${proj.key}_tagline`)}</span>
         <h3>{t(`demos.${proj.key}_title`)}</h3>
         <p>{t(`demos.${proj.key}_desc`)}</p>
-        <p className="zoom-hint-text">{t('demos.zoom_hint')}</p> {/* Ajout d'un rappel textuel pour le zoom */}
+        <p className="zoom-hint-text">{t('demos.zoom_hint')}</p>
 
-        {/* NOUVELLE SECTION D'INFORMATION CLÉ (BORDURE À GAUCHE) */}
         <div className="demo-info-section">
           <div className="info-row">
             <span className="info-label">{t('demos.info_type_label')}</span>
@@ -74,21 +71,36 @@ function ProjectCard({ proj, onZoom, t }) {
 function App() {
   const { t, i18n } = useTranslation();
   
-  // États pour les modales
-  const [modalType, setModalType] = useState(null); // 'legal' ou 'privacy' ou null
-  const [zoomedImage, setZoomedImage] = useState(null); // Gère l'image affichée en plein écran
+  const [modalType, setModalType] = useState(null);
+  const [zoomedData, setZoomedData] = useState(null); // Gère l'image et la galerie en plein écran
 
-  // Empêche le scroll sans faire remonter la page (Fix pour mobile)
+  // Bloque le scroll d'arrière-plan quand une modale est ouverte
   useEffect(() => {
-    if (modalType || zoomedImage) {
+    if (modalType || zoomedData) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [modalType, zoomedImage]);
+  }, [modalType, zoomedData]);
+
+  // NOUVEAU : Observer pour les animations au défilement (Scroll Reveal)
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+        }
+      });
+    }, { threshold: 0.15 }); // Déclenche quand 15% de l'élément est visible
+
+    const hiddenElements = document.querySelectorAll('.reveal');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => hiddenElements.forEach((el) => observer.unobserve(el));
+  }, []);
 
   const [formData, setFormData] = useState({
-    nom: '', email: '', message: '' // Simplification du formulaire
+    nom: '', email: '', message: ''
   });
 
   const handleInputChange = (e) => {
@@ -96,10 +108,8 @@ function App() {
     setFormData({ ...formData, [name]: value });
   };
 
-   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Utilisation des clés du fichier .env pour EmailJS
     const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -126,10 +136,9 @@ function App() {
     { title: t('skills.seo'), desc: t('skills.seoDesc') }
   ];
 
-  // Le tableau n'utilise plus que des clés de traduction
   const realisations = [
     { 
-      key: 'item1', // Clé pour l'i18n (demos.item1_title, demos.item1_desc, etc.)
+      key: 'item1',
       images: [
         '/images/coiffeur/Accueil-barber.png',
         '/images/coiffeur/prix-barber.png'   
@@ -161,9 +170,11 @@ function App() {
             <img src={logoImg} alt="Logo Agence Edson" className="navbar-logo" />
             Agence Edson
           </div>
+          {/* NOUVEAU MENU COMPLET ET ALIGNÉ */}
           <nav className="nav-links">
             <a href="#accueil">{t('nav.home')}</a>
             <a href="#competences">{t('nav.skills')}</a>
+            <a href="#approche">{t('approche.title')}</a> 
             <a href="#about">{t('nav.about')}</a> 
             <a href="#portfolio">{t('nav.demos')}</a>
             <a href="#contact">{t('nav.contact')}</a>
@@ -177,19 +188,19 @@ function App() {
       <section id="accueil" className="hero-section" style={{ backgroundImage: `url(${heroBg})` }}>
         <div className="hero-overlay"></div>
         <div className="container hero-content">
-          <h1>{t('hero.title')}</h1>
-          <p>{t('hero.desc')}</p>
-          <a href="#portfolio" className="btn-primary">{t('hero.btn')}</a>
+          <h1 className="reveal">{t('hero.title')}</h1>
+          <p className="reveal">{t('hero.desc')}</p>
+          <a href="#portfolio" className="btn-primary reveal">{t('hero.btn')}</a>
         </div>
       </section>
 
       <section id="competences" className="competences-section">
         <div className="container">
-          <h2 className="section-title">{t('skills.title')}</h2>
-          <p className="section-subtitle">{t('skills.subtitle')}</p>
+          <h2 className="section-title reveal">{t('skills.title')}</h2>
+          <p className="section-subtitle reveal">{t('skills.subtitle')}</p>
           <div className="competences-grid">
             {competences.map((comp, index) => (
-              <div key={index} className="competence-card">
+              <div key={index} className="competence-card reveal">
                 <h3>{comp.title}</h3>
                 <p>{comp.desc}</p>
               </div>
@@ -200,18 +211,18 @@ function App() {
       
       <section id="approche" className="approche-section">
         <div className="container">
-          <h2 className="section-title">{t('approche.title')}</h2>
-          <p className="section-subtitle">{t('approche.subtitle')}</p>
+          <h2 className="section-title reveal">{t('approche.title')}</h2>
+          <p className="section-subtitle reveal">{t('approche.subtitle')}</p>
           <div className="approche-grid">
-            <div className="approche-card">
+            <div className="approche-card reveal">
               <h3>{t('approche.val1Title')}</h3>
               <p>{t('approche.val1Desc')}</p>
             </div>
-            <div className="approche-card">
+            <div className="approche-card reveal">
               <h3>{t('approche.val2Title')}</h3>
               <p>{t('approche.val2Desc')}</p>
             </div>
-            <div className="approche-card">
+            <div className="approche-card reveal">
               <h3>{t('approche.val3Title')}</h3>
               <p>{t('approche.val3Desc')}</p>
             </div>
@@ -221,9 +232,9 @@ function App() {
 
       <section id="about" className="about-section">
         <div className="container">
-          <h2 className="section-title">{t('about.title')}</h2>
-          <p className="section-subtitle">{t('about.subtitle')}</p>
-          <div className="about-content">
+          <h2 className="section-title reveal">{t('about.title')}</h2>
+          <p className="section-subtitle reveal">{t('about.subtitle')}</p>
+          <div className="about-content reveal">
             <p className="about-text">{t('about.desc')}</p>
           </div>
         </div>
@@ -231,16 +242,16 @@ function App() {
 
       <section id="portfolio" className="portfolio-section">
         <div className="container">
-          <h2 className="section-title">{t('nav.demos')}</h2> {/* Traduction du titre principal */}
-          <p className="section-subtitle">Découvrez comment nous transformons des concepts en outils business concrets.</p>
+          <h2 className="section-title reveal">{t('nav.demos')}</h2> 
+          <p className="section-subtitle reveal">Découvrez comment nous transformons des concepts en outils business concrets.</p>
           
           <div className="demos-detailed-list">
             {realisations.map((proj, index) => (
               <ProjectCard 
                 key={index} 
                 proj={proj} 
-                onZoom={setZoomedImage}
-                t={t} // On passe la fonction 't' au composant enfant
+                onZoom={setZoomedData}
+                t={t}
               />
             ))}
           </div>
@@ -249,8 +260,8 @@ function App() {
 
       <section id="contact" className="contact-section">
         <div className="container">
-          <h2 className="section-title">{t('contact.title')}</h2>
-          <div className="contact-content">
+          <h2 className="section-title reveal">{t('contact.title')}</h2>
+          <div className="contact-content reveal">
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>{t('contact.name')}</label>
@@ -288,6 +299,7 @@ function App() {
               <h4>{t('footer.nav')}</h4>
               <a href="#accueil">{t('nav.home')}</a>
               <a href="#competences">{t('nav.skills')}</a>
+              <a href="#approche">{t('approche.title')}</a> 
               <a href="#about">{t('nav.about')}</a> 
             </div>
             <div>
@@ -297,7 +309,9 @@ function App() {
             </div>
           </div>
         </div>
-      </footer> 
+      </footer>
+
+      {/* LA FENÊTRE MODALE LÉGALE / CONFIDENTIALITÉ */}
       {modalType && (
         <div className="modal-overlay" onClick={() => setModalType(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -323,12 +337,37 @@ function App() {
         </div>
       )}
 
-      {/* LA FENÊTRE MODALE POUR LE ZOOM D'IMAGE */}
-      {zoomedImage && (
-        <div className="modal-overlay" onClick={() => setZoomedImage(null)}>
+      {/* NOUVELLE MODALE POUR LE ZOOM D'IMAGE (AVEC FLÈCHES) */}
+      {zoomedData && (
+        <div className="modal-overlay" onClick={() => setZoomedData(null)}>
           <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="image-modal-close" onClick={() => setZoomedImage(null)}>&times;</button>
-            <img src={zoomedImage} alt="Aperçu du projet zoomé" className="zoomed-image-full" />
+            <button className="image-modal-close" onClick={() => setZoomedData(null)}>&times;</button>
+            
+            {/* Flèche Précédent */}
+            <button 
+              className="modal-slider-btn prev"
+              onClick={(e) => {
+                e.stopPropagation();
+                const newIndex = zoomedData.currentIndex === 0 ? zoomedData.images.length - 1 : zoomedData.currentIndex - 1;
+                setZoomedData({ ...zoomedData, currentIndex: newIndex });
+              }}
+            >
+              &#10094;
+            </button>
+
+            <img src={zoomedData.images[zoomedData.currentIndex]} alt="Aperçu du projet zoomé" className="zoomed-image-full" />
+            
+            {/* Flèche Suivant */}
+            <button 
+              className="modal-slider-btn next"
+              onClick={(e) => {
+                e.stopPropagation();
+                const newIndex = zoomedData.currentIndex === zoomedData.images.length - 1 ? 0 : zoomedData.currentIndex + 1;
+                setZoomedData({ ...zoomedData, currentIndex: newIndex });
+              }}
+            >
+              &#10095;
+            </button>
           </div>
         </div>
       )}

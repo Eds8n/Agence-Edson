@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Accueil",
-    "skills": "Compétences",
+    "skills": "Moi & Mes Expertises",
+    "approche": "Mon approche",
     "about": "À propos",
     "demos": "Démos",
     "contact": "Contact"
