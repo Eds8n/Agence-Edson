@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser';
 import logoImg from './assets/logo-ee.png';
 import './App.css';
 
+
 // ----------------------------------------------------------------------
 // Composant pour le carrousel de chaque projet (Album Photo)
 // ----------------------------------------------------------------------
