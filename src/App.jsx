@@ -11,13 +11,38 @@ import './App.css';
 function ProjectCard({ proj, onZoom, t }) {
   const [imgIndex, setImgIndex] = useState(0);
 
+  // LOGIQUE DE SWIPE POUR LE CARROUSEL
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const handleTouchStart = (e) => setTouchStartX(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEndX(e.targetTouches[0].clientX);
+  
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+    const distance = touchStartX - touchEndX;
+    const minSwipeDistance = 50;
+
+    if (distance > minSwipeDistance) {
+      // Swipe gauche -> image suivante
+      setImgIndex(imgIndex === proj.images.length - 1 ? 0 : imgIndex + 1);
+    } else if (distance < -minSwipeDistance) {
+      // Swipe droite -> image précédente
+      setImgIndex(imgIndex === 0 ? proj.images.length - 1 : imgIndex - 1);
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   return (
     <div className="demo-item-detailed reveal">
-      {/* Conteneur d'image cliquable (passe les infos au zoom) */}
       <div 
         className="carousel-container" 
         onClick={() => onZoom({ images: proj.images, currentIndex: imgIndex })}
         title={t('demos.zoom_hint')}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <img 
           src={proj.images[imgIndex]} 
@@ -29,10 +54,7 @@ function ProjectCard({ proj, onZoom, t }) {
           {imgIndex === 0 ? t('demos.tab_home') : t('demos.tab_prices')}
         </span>
         
-        <div 
-          className="carousel-dots" 
-          onClick={(e) => e.stopPropagation()} 
-        >
+        <div className="carousel-dots" onClick={(e) => e.stopPropagation()}>
           {proj.images.map((_, idx) => (
             <button
               key={idx}
@@ -368,14 +390,8 @@ function App() {
       {/* NOUVELLE MODALE POUR LE ZOOM D'IMAGE (AVEC FLÈCHES) */}
       {zoomedData && (
         <div className="modal-overlay" onClick={() => setZoomedData(null)}>
-          <div 
-            className="image-modal-content" 
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <button className="image-modal-close" onClick={() => setZoomedData(null)}>&times;</button>
+        <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="image-modal-close" onClick={() => setZoomedData(null)}>&times;</button>
             
             {/* Flèche Précédent */}
             <button 
