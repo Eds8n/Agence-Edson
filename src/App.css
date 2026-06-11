@@ -329,7 +329,7 @@ section {
 
 .carousel-container {
   position: relative;
-  height: 400px; /* Grande hauteur pour des images nettes */
+  height: auto; /* La boîte va maintenant suivre la taille de l'image */
   width: 100%;
   background-color: #fcfaf8;
   border-bottom: 1px solid rgba(161, 125, 107, 0.1);
@@ -378,10 +378,18 @@ section {
 
 .carousel-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Remplit l'espace sans déformer */
-  object-position: top; /* Focus sur le haut de ton site */
+  height: auto; /* L'image garde ses proportions naturelles */
+  display: block; /* Aligne l'image parfaitement avec le bas de la boîte */
   transition: transform 0.4s ease;
+}
+
+/* Pour la grande image quand on zoom */
+.zoomed-image-full {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain; /* Garantit que rien n'est coupé */
+  border-radius: 8px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
 }
 
 .carousel-container:hover .carousel-image {

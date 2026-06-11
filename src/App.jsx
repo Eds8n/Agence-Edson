@@ -75,6 +75,33 @@ function App() {
   const [modalType, setModalType] = useState(null);
   const [zoomedData, setZoomedData] = useState(null); // Gère l'image et la galerie en plein écran
 
+  // --- GESTION DU SWIPE SUR MOBILE ---
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const handleTouchStart = (e) => setTouchStartX(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEndX(e.targetTouches[0].clientX);
+  
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+    const distance = touchStartX - touchEndX;
+    const minSwipeDistance = 50; // Distance minimum pour valider le swipe
+
+    if (distance > minSwipeDistance) {
+      // Swipe vers la gauche -> Image suivante
+      const newIndex = zoomedData.currentIndex === zoomedData.images.length - 1 ? 0 : zoomedData.currentIndex + 1;
+      setZoomedData({ ...zoomedData, currentIndex: newIndex });
+    } else if (distance < -minSwipeDistance) {
+      // Swipe vers la droite -> Image précédente
+      const newIndex = zoomedData.currentIndex === 0 ? zoomedData.images.length - 1 : zoomedData.currentIndex - 1;
+      setZoomedData({ ...zoomedData, currentIndex: newIndex });
+    }
+    
+    // Réinitialiser
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   // Bloque le scroll d'arrière-plan quand une modale est ouverte
   useEffect(() => {
     if (modalType || zoomedData) {
@@ -341,7 +368,13 @@ function App() {
       {/* NOUVELLE MODALE POUR LE ZOOM D'IMAGE (AVEC FLÈCHES) */}
       {zoomedData && (
         <div className="modal-overlay" onClick={() => setZoomedData(null)}>
-          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className="image-modal-content" 
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <button className="image-modal-close" onClick={() => setZoomedData(null)}>&times;</button>
             
             {/* Flèche Précédent */}
