@@ -45,3 +45,6 @@ AGENCE EDSON/
 ├── package-lock.json     # Arbre exact des versions des dépendances
 ├── package.json          # Configuration du projet, scripts et dépendances
 └── README.md             # Documentation du projet
+```
+
+<img width="1901" height="908" alt="Capture d’écran 2026-07-20 012732" src="https://github.com/user-attachments/assets/aa3d9a05-552b-4302-92c7-899414f0b1b0" />
