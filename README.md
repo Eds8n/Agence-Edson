@@ -1,16 +1,47 @@
-# React + Vite
+# 🏢 Agence Personnelle Edson Eugene
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**[ Visiter le site en ligne ici](https://edson-agence.vercel.app/)**
 
-Currently, two official plugins are available:
+Une plateforme web moderne et réactive présentant les services, le portfolio et les expertises de mon agence web. Ce dépôt sert de vitrine pour présenter le code source et l'architecture de mon site officiel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+##  Fonctionnalités
 
-## React Compiler
+* **Présentation des Services :** Découverte détaillée des offres de développement sur mesure et de consultation.
+* **Portfolio Dynamique :** Mise en avant des projets réalisés avec un système de carrousel pour les galeries photos.
+* **Support Multilingue :** Application disponible en Français et Anglais.
+* **Prise de Contact Facile :** Formulaire de contact interactif intégré pour les clients potentiels.
+* **Interface Adaptative :** Design entièrement responsive (mobile, tablette, bureau).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##  Technologies
 
-## Expanding the ESLint configuration
+* **Frontend :** React, JavaScript (Vanilla), HTML5, CSS
+* **Outil de construction :** Vite
+* **Internationalisation :** react-i18next
+* **Messagerie :** EmailJS
+* **Hébergement & Déploiement :** Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##  Structure du Projet
+
+```text
+AGENCE EDSON/
+├── node_modules/         # Dépendances du projet
+├── public/               # Fichiers statiques et ressources publiques
+│   ├── images/           # Images des projets du portfolio (coiffeur, Pattes & Co, resto)
+│   ├── locales/          # Fichiers de traduction JSON (en, fr)
+│   ├── favicon.png       # Icône du site
+│   ├── favicon.svg       # Icône vectorielle du site
+│   └── icons.svg         # Fichier d'icônes
+├── src/                  # Code source de l'application React
+│   ├── assets/           # Ressources internes (logos, etc.)
+│   ├── App.css           # Styles spécifiques du composant principal
+│   ├── App.jsx           # Composant principal (Logique de l'interface et du carrousel)
+│   ├── i18n.js           # Configuration de l'internationalisation
+│   ├── index.css         # Styles globaux de l'application
+│   └── main.jsx          # Point d'entrée principal de l'application
+├── .env                  # Variables secrètes (clés API pour EmailJS)
+├── .gitignore            # Fichiers et dossiers ignorés par Git
+├── eslint.config.js      # Configuration des règles de linter
+├── index.html            # Fichier HTML racine
+├── package-lock.json     # Arbre exact des versions des dépendances
+├── package.json          # Configuration du projet, scripts et dépendances
+└── README.md             # Documentation du projet
